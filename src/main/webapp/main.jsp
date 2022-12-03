@@ -8,6 +8,12 @@
 <meta name="viewport" content="width=device-width", initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
 <title>다목적 모임 웹 사이트</title>
+<style>
+img{
+margin: auto;
+display: block;
+}
+</style>
 </head>
 <body>
 	<%
@@ -68,5 +74,6 @@
 	</nav>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
+	<img src="main.png" width="900" height="600">
 </body>
 </html>
