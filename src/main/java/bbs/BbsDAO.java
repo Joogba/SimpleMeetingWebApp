@@ -132,8 +132,8 @@ public class BbsDAO {
 		String SQL ="UPDATE BBS SET bbsTitle = ?, bbsContent = ? WHERE bbsID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext());
-			pstmt.setString(2, bbsTitle);
+			pstmt.setString(1, bbsTitle);
+			pstmt.setString(2, bbsContent);
 			pstmt.setInt(3, bbsID);
 			return pstmt.executeUpdate();
 		}catch(Exception e){
