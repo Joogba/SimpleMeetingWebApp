@@ -74,7 +74,7 @@
 	</nav>
 	<div class="cotainer">
 		<div class="row">
-			<form method="post" action="updateAction.jsp>bbsID=<%= bbsID %>">
+			<form method="post" action="updateAction.jsp?bbsID=<%= bbsID %>">
 				<table class="table table-striped" style = "text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
