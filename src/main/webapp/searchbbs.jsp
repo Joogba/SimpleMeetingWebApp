@@ -1,16 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
 <%@ page import="java.util.ArrayList" %>
+
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width", initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>다목적 모임 웹 사이트</title>
+<title>Insert title here</title>
+</head>
+<body>
+	<title>다목적 모임 웹 사이트</title>
 <style type="text/css">
 	a, a:hover{
 	color: #000000;
@@ -65,21 +72,33 @@
 				</li>
 			</ul>
 			<%
-				
-
-
 				if(userID ==null){
 			%>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="login.jsp">로그인</a></li>
-				<li><a href="join.jsp">회원가입</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">접속하기<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="login.jsp">로그인</a></li>
+						<li><a href="join.jsp">회원가입</a></li>
+						
+					</ul>
+				</li>
 			</ul>
 			<% 		
 				}else{
-			%>	
-			<ul class="nav navbar-nav navbar-right">	
-				<li><a href="logoutAction.jsp">로그아웃</a></li>
-			</ul>
+			%>		
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">회원관리<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="logoutAction.jsp">로그아웃</a></li>
+					</ul>
+				</li>
+			</ul>			
 			<%
 				}
 			%>
@@ -100,7 +119,10 @@
 				<tbody>
 					<%
 						BbsDAO bbsDAO = new BbsDAO();
-						ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
+						ArrayList<Bbs> list = bbsDAO.getSearch(request.getParameter("searchField"),
+								request.getParameter("searchText"));
+
+
 						for(int i=0; i<list.size(); i++){
 					%>
 					<tr>
@@ -108,7 +130,7 @@
 						<td><a href="view.jsp?bbsID=<%= list.get(i).getBbsID() %>"><%= list.get(i).getBbsTitle() %></a></td>
 						<td><%= list.get(i).getCategory() %></td>
 						<td><%= list.get(i).getUserID() %></td>
-						<td><%= list.get(i).getBbsDate().substring(0,10) +" "+ list.get(i).getBbsDate().substring(11,13)+ "시" 
+						<td><%= list.get(i).getBbsDate().substring(0,10) + " " + list.get(i).getBbsDate().substring(11,13)+ "시" 
 								+ list.get(i).getBbsDate().substring(14,16) + "분" %></td>		
 					</tr>
 					<%
@@ -133,5 +155,7 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
+</body>
+</html>
 </body>
 </html>

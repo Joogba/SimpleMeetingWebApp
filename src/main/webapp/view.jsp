@@ -3,6 +3,8 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbs.Bbs" %>
 <%@ page import="bbs.BbsDAO" %>
+<%@ page import="meet.MeetDAO" %>
+<%@ page import="meet.Meet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +31,7 @@
 			script.println("</script>");
 		}
 		Bbs bbs = new BbsDAO().getBbs(bbsID);
+		Meet meet = new MeetDAO().getMeetbbsID(bbsID);
 	%>
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
@@ -90,6 +93,33 @@
 							<td>내용</td>
 							<td colspan="2" style="min-height: 200px; text-align: left;"><%= bbs.getBbsContent().replaceAll(" ","&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("/n", "<br>") %></td>
 						</tr>
+						
+						<% if(meet != null){ %>
+						<tr>
+							<td>모임 제목</td>
+							<td colspan="2"><%= meet.getMeetTitle() %></td>
+						</tr>
+						<tr>
+							<td>모임 날짜</td>
+							<td colspan="2"><%= meet.getMeetDate() %></td>
+						</tr>
+						<tr>
+							<td>모임 장소</td>
+							<td colspan="2"><%= meet.getMeetPlace() %></td>
+						</tr>
+						<tr>
+							<td>현재인원</td>
+							<td colspan="2"><%= meet.getCount() %></td>
+						</tr>
+						<tr>
+							<td>최대인원</td>
+							<td colspan="2"><%= meet.getMaxcount() %></td>
+						</tr>
+						<% }else{ %>
+						<tr>
+							<td>모임 없음</td>
+						</tr>
+						<% } %>
 					</tbody>
 				</table>
 				<a href="bbs.jsp" class="btn btn-primary">목록</a>

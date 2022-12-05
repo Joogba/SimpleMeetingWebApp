@@ -43,6 +43,9 @@
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20">
 					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="비밀번호 재입력" name="userPassword2" maxlength="20">
+					</div>
 					<div class="form-group" style="text-align: center">
 						<div class="btn-group" data-toggle = "buttons">
 							<label class="btn btn-primary active">

@@ -66,6 +66,18 @@
 						<tr>
 							<td><textarea class="form-control" placeholder="글 내용" name="bbsContent" maxlength="2048" style="height: 350px;"></textarea></td>
 						</tr>	
+						<tr>
+							<td><input type="text" class="form-control" placeholder="모임 제목" name="meetTitle" maxlength="50"></td>
+						</tr>	
+						<tr>
+							<td><input type="text" class="form-control" placeholder="모임 날짜" name="meetDate" maxlength="50"></td>
+						</tr>	
+						<tr>
+							<td><input type="text" class="form-control" placeholder="모임 장소" name="meetPlace" maxlength="50"></td>
+						</tr>	
+						<tr>
+							<td><input type="text" class="form-control" placeholder="모임 최대 인원" name="maxcount" maxlength="50"></td>
+						</tr>	
 					</tbody>
 				</table>
 				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">

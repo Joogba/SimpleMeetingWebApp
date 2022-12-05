@@ -14,7 +14,7 @@ public class BbsDAO {
 		try {
 			String dbURL = "jdbc:mysql://localhost:3306/WEBPAGE";
 			String dbID = "root";
-			String dbPassword = "1234";
+			String dbPassword = "admin";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);			
 		}catch(Exception e){
@@ -51,16 +51,19 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int write(String bbsTitle, String userID, String bbsContent) {
-		String SQL ="INSERT INTO BBS VALUES(? ,?, ?, ?, ?, ?)";
+	public int write(String bbsTitle, String userID, String bbsContent,String category) {
+		String SQL ="INSERT INTO BBS VALUES(? ,?, ?, ?, ?, ?, ?)";
+		System.out.println(bbsTitle);
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext());
+			int id = getNext();
+			pstmt.setInt(1, id);
 			pstmt.setString(2, bbsTitle);
 			pstmt.setString(3, userID);
 			pstmt.setString(4, getDate());
 			pstmt.setString(5, bbsContent);
 			pstmt.setInt(6, 1);
+			pstmt.setString(7, category);
 			return pstmt.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -83,6 +86,7 @@ public class BbsDAO {
 				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));
+				bbs.setCategory(rs.getString(7));
 				list.add(bbs);
 			}
 		}catch(Exception e){
@@ -90,6 +94,34 @@ public class BbsDAO {
 		}
 		return list;
 	}
+	public ArrayList<Bbs> getSearch(String searchField, String searchText){//특정한 리스트를 받아서 반환
+	      ArrayList<Bbs> list = new ArrayList<Bbs>();
+	      String SQL ="select * from bbs WHERE "+searchField.trim();
+	      try {
+	            if(searchText != null && !searchText.equals("") ){
+					SQL += " LIKE ? AND bbsAvailable = 1 order by bbsID desc limit 10";
+					System.out.println(searchText);
+				
+	            }
+	            PreparedStatement pstmt=conn.prepareStatement(SQL);
+	            pstmt.setString(1,"%"+searchText+"%");
+				rs=pstmt.executeQuery();//select
+	         while(rs.next()) {
+	            Bbs bbs = new Bbs();
+	            bbs.setBbsID(rs.getInt(1));
+	            bbs.setBbsTitle(rs.getString(2));
+	            bbs.setUserID(rs.getString(3));
+	            bbs.setBbsDate(rs.getString(4));
+	            bbs.setBbsContent(rs.getString(5));
+	            bbs.setBbsAvailable(rs.getInt(6));
+	            bbs.setCategory(rs.getString(7));
+	            list.add(bbs);//list에 해당 인스턴스를 담는다.
+	         }         
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	      }
+	      return list;
+	   }
 	
 	public boolean nextPage(int pageNumber) {
 		String SQL ="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1";
@@ -120,6 +152,7 @@ public class BbsDAO {
 				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));
+				bbs.setCategory(rs.getString(7));
 				return bbs;
 			}
 		}catch(Exception e){

@@ -3,12 +3,11 @@ package meet;
 public class Meet {
 	private long meetid;
 	private int bbsid;//나중에 bbs테이블에 meetid 추가
-	private String date;
-	private String title;
-	private String place; // 장소
+	private String meetDate;
+	private String meetTitle;
+	private String meetPlace; // 장소
 	private int count;
 	private int maxcount;
-	
 	
 	public long getMeetid() {
 		return meetid;
@@ -22,23 +21,23 @@ public class Meet {
 	public void setBbsid(int bbsid) {
 		this.bbsid = bbsid;
 	}
-	public String getDate() {
-		return date;
+	public String getMeetDate() {
+		return meetDate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setMeetDate(String meetDate) {
+		this.meetDate = meetDate;
 	}
-	public String getTitle() {
-		return title;
+	public String getMeetTitle() {
+		return meetTitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setMeetTitle(String meetTitle) {
+		this.meetTitle = meetTitle;
 	}
-	public String getPlace() {
-		return place;
+	public String getMeetPlace() {
+		return meetPlace;
 	}
-	public void setPlace(String place) {
-		this.place = place;
+	public void setMeetPlace(String meetPlace) {
+		this.meetPlace = meetPlace;
 	}
 	public int getCount() {
 		return count;
@@ -52,6 +51,9 @@ public class Meet {
 	public void setMaxcount(int maxcount) {
 		this.maxcount = maxcount;
 	}
+	
+	
+	
 	
 	
 }
